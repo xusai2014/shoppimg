@@ -35,7 +35,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </Stack>
 
       <Typography variant="h5" fontWeight={700} sx={{ mt: 6, mb: 3 }}>{dict.home.featured}</Typography>
-      <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "repeat(2,1fr)", lg: "repeat(3,1fr)", xl: "repeat(4,1fr)" }, gap: { xs: 2.5, sm: 3 } }}>
+      <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "repeat(2,1fr)", lg: "repeat(3,1fr)", xl: "repeat(4,1fr)" }, gap: { xs: 2.5, sm: 3 }, "& > *": { minWidth: 0 } }}>
         {products.slice(0, 8).map((p) => (
           <ProductCard key={p.id} product={p} locale={locale} sku={p.skus[0]} />
         ))}

@@ -16,13 +16,13 @@ export default function ProductCard({ product, locale, sku }: { product: Product
       <Card
         component={Link}
         href={`/${locale}/products/${product.id}`}
-        sx={{ height: "100%", display: "flex", flexDirection: "column", textDecoration: "none", overflow: "hidden" }}
+        sx={{ height: "100%", minWidth: 0, width: "100%", display: "flex", flexDirection: "column", textDecoration: "none", overflow: "hidden" }}
       >
         <Box
           sx={{
             height: { xs: 200, sm: 180 },
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: { xs: 88, sm: 72 }, background: product.gradient,
+            display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden",
+            fontSize: { xs: 88, sm: 72 }, lineHeight: 1, background: product.gradient,
             position: "relative",
           }}
         >
@@ -36,16 +36,13 @@ export default function ProductCard({ product, locale, sku }: { product: Product
             />
           )}
         </Box>
-        <CardContent sx={{ flexGrow: 1, display: "flex", flexDirection: "column", gap: 0.5, p: { xs: 2, sm: 2.5 } }}>
+        <CardContent sx={{ flexGrow: 1, display: "flex", flexDirection: "column", gap: 0.5, p: { xs: 2, sm: 2.5 }, minWidth: 0, "&:last-child": { pb: 2 } }}>
           <Typography
             fontWeight={700}
             sx={{
-              fontSize: { xs: 16, sm: 16 },
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
-              minHeight: { xs: 44, sm: 44 },
+              fontSize: 16, lineHeight: 1.4, minWidth: 0,
+              display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
+              minHeight: 44,
             }}
           >
             {product.name[locale]}
@@ -54,19 +51,16 @@ export default function ProductCard({ product, locale, sku }: { product: Product
             variant="body2"
             color="text.secondary"
             sx={{
-              mb: 1,
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
+              mb: 1, minWidth: 0,
+              display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
             }}
           >
             {product.description[locale]}
           </Typography>
           <Rating value={product.rating} precision={0.1} size="small" readOnly />
-          <Box sx={{ mt: "auto", pt: 1, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 1 }}>
-            <Typography variant="h6" color="primary.main" fontWeight={900}>{formatPrice(price)}</Typography>
-            <Button size="small" variant="contained" sx={{ px: { xs: 2, sm: 2 }, minWidth: 0, whiteSpace: "nowrap" }}>
+          <Box sx={{ mt: "auto", pt: 1, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 1, flexWrap: "wrap", minWidth: 0 }}>
+            <Typography variant="h6" color="primary.main" fontWeight={900} noWrap sx={{ flexShrink: 0 }}>{formatPrice(price)}</Typography>
+            <Button size="small" variant="contained" sx={{ px: 2, minWidth: 0, flexShrink: 0 }}>
               {dict.product.addToCart}
             </Button>
           </Box>

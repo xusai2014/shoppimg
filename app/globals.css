@@ -1,2 +1,7 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+
+/* RWD 兜底：任何情况下禁止横向溢出 / 横向滚动 */
+html, body { max-width: 100%; overflow-x: hidden; }
+img, svg, video { max-width: 100%; height: auto; }
+[class*="MuiGrid-container"] > * { min-width: 0; }
