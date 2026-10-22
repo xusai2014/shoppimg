@@ -16,7 +16,7 @@ export default function ProductCard({ product, locale, sku }: { product: Product
       <Card
         component={Link}
         href={`/${locale}/products/${product.id}`}
-        sx={{ height: "100%", display: "flex", flexDirection: "column", textDecoration: "none", width: { xs: "100%", sm: "calc(50% - 12px)", md: "calc(25% - 18px)" } }}
+        sx={{ height: "100%", display: "flex", flexDirection: "column", textDecoration: "none", width: { xs: "100%", sm: "calc(50% - 12px)", lg: "calc(33.33% - 16px)", xl: "calc(25% - 18px)" } }}
       >
         <Box
           sx={{

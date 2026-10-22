@@ -38,7 +38,7 @@ export default function ProductDetailClient({ id, locale }: { id: string; locale
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
+    <Container maxWidth="xl" sx={{ py: 4 }}>
       <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
@@ -48,8 +48,8 @@ export default function ProductDetailClient({ id, locale }: { id: string; locale
         >
           <Box
             sx={{
-              height: 380, borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 140, background: product.gradient,
+              height: { xs: 260, md: 380 }, borderRadius: { xs: 3, md: 4 }, display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: { xs: 96, md: 140 }, background: product.gradient,
             }}
           >
             {product.emoji}

@@ -29,7 +29,7 @@ export default async function ProductsPage({
   });
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
+    <Container maxWidth="xl" sx={{ py: 4 }}>
       <Typography variant="h5" fontWeight={700} gutterBottom>
         {kw ? `${dict.search.title}: "${q}"` : dict.search.all}
       </Typography>
