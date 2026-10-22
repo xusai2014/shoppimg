@@ -1,5 +1,6 @@
 "use client";
 
+import { formatPrice } from "@/lib/orders";
 import Link from "next/link";
 import { Card, CardContent, Box, Typography, Rating, Button } from "@mui/material";
 import { motion } from "framer-motion";
@@ -9,7 +10,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 
 export default function ProductCard({ product, locale, sku }: { product: Product; locale: Locale; sku?: Sku }) {
   const dict = getDictionary(locale);
-  const price = (product.basePrice + (sku?.priceDelta ?? 0)).toLocaleString();
+  const price = product.basePrice + (sku?.priceDelta ?? 0);
   const currency = dict.common.currency;
   return (
     <motion.div whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 300, damping: 22 }}>
@@ -32,7 +33,7 @@ export default function ProductCard({ product, locale, sku }: { product: Product
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }} noWrap>{product.description[locale]}</Typography>
           <Rating value={product.rating} precision={0.1} size="small" readOnly />
           <Box sx={{ mt: "auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <Typography variant="h6" color="primary.main">{currency}{price}</Typography>
+            <Typography variant="h6" color="primary.main">{formatPrice(price)}</Typography>
             <Button size="small" variant="text">{dict.product.addToCart} →</Button>
           </Box>
         </CardContent>

@@ -4,7 +4,7 @@ export const dictionaries = {
   zh: {
     nav: { home: "首页", products: "商品", cart: "购物车", orders: "我的订单" },
     home: { heroTitle: "精选好物，一站购齐", heroSubtitle: "新用户专享优惠，全场包邮", shopNow: "立即选购", featured: "为你推荐" },
-    search: { placeholder: "搜索商品名称或描述", title: "搜索结果", empty: "没有找到相关商品", all: "全部商品", resultCount: "个商品" },
+    search: { placeholder: "搜索商品名称或描述", title: "搜索结果", empty: "没有找到相关商品", all: "全部商品", resultCount: "个商品", sort: "排序", sortFeatured: "推荐", sortRating: "评分最高", sortPriceAsc: "价格从低到高", sortPriceDesc: "价格从高到低" },
     product: {
       addToCart: "加入购物车",
       buyNow: "立即购买",
@@ -23,6 +23,8 @@ export const dictionaries = {
       total: "合计",
       checkout: "去结算",
       remove: "删除",
+      freeShipping: "再加 {amount} 即享免邮",
+      freeShippingUnlocked: "🎉 已解锁免邮！",
     },
     checkout: {
       title: "确认订单",
@@ -44,7 +46,7 @@ export const dictionaries = {
   en: {
     nav: { home: "Home", products: "Products", cart: "Cart", orders: "Orders" },
     home: { heroTitle: "Curated goods, all in one place", heroSubtitle: "New-user deals, free shipping", shopNow: "Shop now", featured: "Featured for you" },
-    search: { placeholder: "Search products", title: "Search results", empty: "No products found", all: "All products", resultCount: "products" },
+    search: { placeholder: "Search products", title: "Search results", empty: "No products found", all: "All products", resultCount: "products", sort: "Sort", sortFeatured: "Featured", sortRating: "Top rated", sortPriceAsc: "Price: low to high", sortPriceDesc: "Price: high to low" },
     product: {
       addToCart: "Add to cart",
       buyNow: "Buy now",
@@ -63,6 +65,8 @@ export const dictionaries = {
       total: "Total",
       checkout: "Checkout",
       remove: "Remove",
+      freeShipping: "Add {amount} more for free shipping",
+      freeShippingUnlocked: "🎉 You've unlocked free shipping!",
     },
     checkout: {
       title: "Confirm order",

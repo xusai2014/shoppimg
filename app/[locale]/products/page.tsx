@@ -10,23 +10,37 @@ export default async function ProductsPage({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ q?: string; cat?: string }>;
+  searchParams: Promise<{ q?: string; cat?: string; sort?: string }>;
 }) {
   const { locale: raw } = await params;
-  const { q = "", cat = "all" } = await searchParams;
+  const { q = "", cat = "all", sort = "featured" } = await searchParams;
   const locale = raw as Locale;
   const dict = getDictionary(locale);
 
   const kw = q.trim().toLowerCase();
-  const list = products.filter((p) => {
-    const inCat = cat === "all" || p.category[locale].toLowerCase() === cat;
-    const inKw =
-      !kw ||
-      p.name[locale].toLowerCase().includes(kw) ||
-      p.description[locale].toLowerCase().includes(kw) ||
-      p.category[locale].toLowerCase().includes(kw);
-    return inCat && inKw;
-  });
+  const list = products
+    .filter((p) => {
+      const inCat = cat === "all" || p.category[locale].toLowerCase() === cat;
+      const inKw =
+        !kw ||
+        p.name[locale].toLowerCase().includes(kw) ||
+        p.description[locale].toLowerCase().includes(kw) ||
+        p.category[locale].toLowerCase().includes(kw);
+      return inCat && inKw;
+    })
+    .sort((a, b) =>
+      sort === "price-asc" ? a.basePrice - b.basePrice
+      : sort === "price-desc" ? b.basePrice - a.basePrice
+      : sort === "rating" ? b.rating - a.rating
+      : 0
+    );
+
+  const sorts: { key: string; label: string }[] = [
+    { key: "featured", label: dict.search.sortFeatured },
+    { key: "rating", label: dict.search.sortRating },
+    { key: "price-asc", label: dict.search.sortPriceAsc },
+    { key: "price-desc", label: dict.search.sortPriceDesc },
+  ];
 
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
@@ -35,6 +49,7 @@ export default async function ProductsPage({
       </Typography>
       <Box component="form" method="get" action={`/${locale}/products`} sx={{ my: 2 }}>
         <input type="hidden" name="cat" value={cat} />
+        <input type="hidden" name="sort" value={sort} />
         <TextField fullWidth size="small" name="q" defaultValue={q} placeholder={dict.search.placeholder} />
       </Box>
       <Stack direction="row" spacing={1} sx={{ mb: 3, flexWrap: "wrap", gap: 1 }}>
@@ -48,6 +63,24 @@ export default async function ProductsPage({
               href={href}
               label={c[locale]}
               color={active ? "primary" : "default"}
+              clickable
+            />
+          );
+        })}
+      </Stack>
+      <Stack direction="row" spacing={1} sx={{ mb: 1.5, flexWrap: "wrap", gap: 1, alignItems: "center" }}>
+        <Typography variant="body2" color="text.secondary">{dict.search.sort}:</Typography>
+        {sorts.map((s) => {
+          const href = `/${locale}/products?cat=${cat}&sort=${s.key}${q ? `&q=${encodeURIComponent(q)}` : ""}`;
+          return (
+            <Chip
+              key={s.key}
+              component={Link}
+              href={href}
+              label={s.label}
+              size="small"
+              color={s.key === sort ? "secondary" : "default"}
+              variant={s.key === sort ? "filled" : "outlined"}
               clickable
             />
           );

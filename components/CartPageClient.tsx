@@ -1,5 +1,6 @@
 "use client";
 
+import { formatPrice, FREE_SHIPPING_THRESHOLD } from "@/lib/orders";
 import Link from "next/link";
 import {
   Container, Typography, Stack, Box, Button, IconButton, Paper, Divider,
@@ -38,6 +39,23 @@ export default function CartPage({ locale }: { locale: Locale }) {
         </Stack>
       ) : (
         <>
+          <Paper variant="outlined" sx={{ mt: 2, p: 2, bgcolor: "#fffaf5" }}>
+            {total >= FREE_SHIPPING_THRESHOLD ? (
+              <Typography variant="body2" color="success.main" fontWeight={700}>
+                {dict.cart.freeShippingUnlocked}
+              </Typography>
+            ) : (
+              <>
+                <Typography variant="body2" color="text.secondary">
+                  {dict.cart.freeShipping.replace("{amount}", formatPrice(FREE_SHIPPING_THRESHOLD - total))}
+                </Typography>
+                <Box sx={{ height: 6, borderRadius: 3, bgcolor: "grey.200", mt: 1 }}>
+                  <Box sx={{ width: `${Math.min(100, (total / FREE_SHIPPING_THRESHOLD) * 100)}%`, height: "100%", borderRadius: 3, bgcolor: "primary.main", transition: "width .4s" }} />
+                </Box>
+              </>
+            )}
+          </Paper>
+
           <Paper variant="outlined" sx={{ mt: 2 }}>
             {rows.map((r, i) => (
               <Box key={`${r.productId}-${r.skuId}`}>
@@ -49,7 +67,7 @@ export default function CartPage({ locale }: { locale: Locale }) {
                   <Box sx={{ flexGrow: 1 }}>
                     <Typography fontWeight={700}>{r.product.name[locale]}</Typography>
                     <Typography variant="body2" color="text.secondary">{r.sku.label[locale]}</Typography>
-                    <Typography color="primary.main" fontWeight={700}>{currency}{r.price.toLocaleString()}</Typography>
+                    <Typography color="primary.main" fontWeight={700}>{formatPrice(r.price)}</Typography>
                   </Box>
                   <Stack direction="row" spacing={0.5} alignItems="center">
                     <Button size="small" variant="outlined" onClick={() => updateQty(r.productId, r.skuId, r.qty - 1)}>−</Button>
@@ -66,7 +84,7 @@ export default function CartPage({ locale }: { locale: Locale }) {
 
           <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={2} sx={{ mt: 3 }}>
             <Typography variant="h6">
-              {dict.cart.total}: <span style={{ color: "#e8532f" }}>{currency}{total.toLocaleString()}</span>
+              {dict.cart.total}: <span style={{ color: "#e8532f" }}>{formatPrice(total)}</span>
             </Typography>
             <Button component={Link} href={`/${locale}/checkout`} variant="contained" size="large">
               {dict.cart.checkout}
