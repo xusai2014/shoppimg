@@ -1,9 +1,10 @@
 "use client";
 
+import { formatPrice } from "@/lib/orders";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  Container, Stack, Box, Typography, Rating, Button, Chip, Divider, Snackbar, Alert, Paper,
+  Container, Stack, Box, Typography, Rating, Button, Chip, Divider, Snackbar, Alert, Paper, AppBar, Toolbar,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { getProduct } from "@/data/products";
@@ -38,7 +39,7 @@ export default function ProductDetailClient({ id, locale }: { id: string; locale
   };
 
   return (
-    <Container maxWidth="xl" sx={{ py: 4 }}>
+    <Container maxWidth="xl" sx={{ py: 4, pb: { xs: 10, md: 4 } }}>
       <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
@@ -69,7 +70,7 @@ export default function ProductDetailClient({ id, locale }: { id: string; locale
             <Chip label={dict.product.inStock} size="small" color="success" variant="outlined" />
           </Stack>
           <Typography variant="h3" color="primary.main" fontWeight={900}>
-            {currency}{price.toLocaleString()}
+            {formatPrice(price)}
           </Typography>
 
           <Divider />
@@ -78,7 +79,7 @@ export default function ProductDetailClient({ id, locale }: { id: string; locale
             {product.skus.map((s) => (
               <Chip
                 key={s.id}
-                label={`${s.label[locale]} · ${currency}${(product.basePrice + s.priceDelta).toLocaleString()}`}
+                label={`${s.label[locale]} · ${formatPrice(product.basePrice + s.priceDelta)}`}
                 color={s.id === sku.id ? "primary" : "default"}
                 variant={s.id === sku.id ? "filled" : "outlined"}
                 onClick={() => setSkuId(s.id)}
@@ -119,6 +120,30 @@ export default function ProductDetailClient({ id, locale }: { id: string; locale
           {product.category[locale]} · {sku.label[locale]} · {dict.product.inStock}
         </Typography>
       </Box>
+
+      {/* 移动端吸底购买栏：随时可达的加购动作 */}
+      <AppBar
+        position="fixed"
+        color="inherit"
+        elevation={2}
+        sx={{ top: "auto", bottom: 0, display: { xs: "block", md: "none" }, bgcolor: "background.paper" }}
+      >
+        <Toolbar sx={{ gap: 2 }}>
+          <Typography variant="h6" color="primary.main" fontWeight={900} sx={{ flex: 1 }}>
+            {formatPrice(price)}
+          </Typography>
+          <Button variant="outlined" onClick={add}>{dict.product.addToCart}</Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              addItem(product.id, sku.id, qty);
+              router.push(`/${locale}/checkout`);
+            }}
+          >
+            {dict.product.buyNow}
+          </Button>
+        </Toolbar>
+      </AppBar>
 
       <Snackbar open={toast} autoHideDuration={2000} onClose={() => setToast(false)}>
         <Alert severity="success" onClose={() => setToast(false)}>{dict.product.added}</Alert>

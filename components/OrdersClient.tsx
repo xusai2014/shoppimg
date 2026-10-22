@@ -1,5 +1,6 @@
 "use client";
 
+import { formatPrice } from "@/lib/orders";
 import { useEffect, useState } from "react";
 import { Container, Typography, Stack, Paper, Divider } from "@mui/material";
 import { getOrders, type Order } from "@/lib/orders";
@@ -33,7 +34,7 @@ export default function OrdersClient({ locale }: { locale: Locale }) {
               <Divider sx={{ my: 1.5 }} />
               {o.items.map((it, i) => (
                 <Typography key={i} variant="body2">
-                  {(locale === "zh" ? it.nameZh : it.nameEn)} × {it.qty} — {currency}{(it.unitPrice * it.qty).toLocaleString()}
+                  {(locale === "zh" ? it.nameZh : it.nameEn)} × {it.qty} — {formatPrice(it.unitPrice * it.qty)}
                 </Typography>
               ))}
               <Divider sx={{ my: 1.5 }} />
@@ -42,7 +43,7 @@ export default function OrdersClient({ locale }: { locale: Locale }) {
                   {o.address.name} · {o.address.phone} · {o.address.detail}
                 </Typography>
                 <Stack direction="row" spacing={2} alignItems="center">
-                  <Typography fontWeight={700} color="primary.main">{currency}{o.total.toLocaleString()}</Typography>
+                  <Typography fontWeight={700} color="primary.main">{formatPrice(o.total)}</Typography>
                   <Typography variant="caption" color="success.main">{dict.orders.status}</Typography>
                 </Stack>
               </Stack>

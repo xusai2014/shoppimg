@@ -1,5 +1,6 @@
 "use client";
 
+import { formatPrice } from "@/lib/orders";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -88,13 +89,13 @@ export default function CheckoutClient({ locale }: { locale: Locale }) {
                   <Typography variant="body2" noWrap sx={{ maxWidth: "60%" }}>
                     {r.product.name[locale]} × {r.qty}
                   </Typography>
-                  <Typography variant="body2">{currency}{(r.price * r.qty).toLocaleString()}</Typography>
+                  <Typography variant="body2">{formatPrice(r.price * r.qty)}</Typography>
                 </Stack>
               ))}
               <Divider sx={{ my: 1 }} />
               <Stack direction="row" justifyContent="space-between">
                 <Typography fontWeight={700}>{dict.cart.total}</Typography>
-                <Typography fontWeight={700} color="primary.main">{currency}{total.toLocaleString()}</Typography>
+                <Typography fontWeight={700} color="primary.main">{formatPrice(total)}</Typography>
               </Stack>
               <Box component={Link} href={`/${locale}/cart`} sx={{ fontSize: 13 }}>{dict.nav.cart} ←</Box>
             </Stack>
