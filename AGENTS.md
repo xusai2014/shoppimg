@@ -1,4 +1,4 @@
-# Agents.md — CYG Mall
+# AGENTS.md — CYG Mall
 
 > 本文件是 AI 编程 harness 的**唯一稳定入口**。遵循「渐进式披露」原则：
 > 先读本文件 → 按任务类型加载对应二级文档 → 仅在需要时再读源码。

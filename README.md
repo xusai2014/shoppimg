@@ -1,6 +1,6 @@
 # CYG Mall — 电商演示站
 
-Next.js 15 (App Router) + Material UI 6 + framer-motion，中英双语 i18n，Mock 数据无后端，Vercel 一键部署，内置 AI 编程 harness（Agents.md）与评估质量门禁。
+Next.js 15 (App Router) + Material UI 6 + framer-motion，中英双语 i18n，Mock 数据无后端，Vercel 一键部署，内置 AI 编程 harness（AGENTS.md）与评估质量门禁。
 
 ## 快速开始
 
@@ -21,7 +21,7 @@ pnpm dev        # http://localhost:3000 → 自动跳转 /zh
 
 | 文件 | 作用 |
 | --- | --- |
-| `Agents.md` | 渐进式披露入口：路由表 + 分层约定 + 二级文档索引，AI 按需加载省 token |
+| `AGENTS.md` | 渐进式披露入口：路由表 + 分层约定 + 二级文档索引，AI 按需加载省 token |
 | `AGENTS/quality-gate.md` | 质量门禁说明（评估工程规则） |
 | `scripts/eval.mjs` | 评估脚本：typecheck → build → i18n 键完整性 → Mock 数据校验 → 路由覆盖 → 硬编码文案扫描 |
 | `.github/workflows/quality-gate.yml` | CI 复用同一 `pnpm eval`，本地与 CI 口径一致 |
