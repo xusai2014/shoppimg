@@ -78,7 +78,7 @@ try {
       const p = join(dir, d.name);
       return d.isDirectory() ? walk(p) : [p];
     });
-  const allow = (p) => /dictionaries\.ts$|data\/products\.ts$|Agents\.md$|AGENTS\//.test(p) || p.endsWith(".css") || p.endsWith(".md");
+  const allow = (p) => /dictionaries\.ts$|data\/products\.ts$|AGENTS\.md$|AGENTS\//.test(p) || p.endsWith(".css") || p.endsWith(".md");
   const hits = [];
   for (const dir of ["app", "components", "context", "lib", "i18n"]) {
     for (const f of walk(join(root, dir))) {
