@@ -20,7 +20,11 @@ export default async function ProductsPage({
   const kw = q.trim().toLowerCase();
   const list = products
     .filter((p) => {
-      const inCat = cat === "all" || p.category[locale].toLowerCase() === cat;
+      // Chip values are slug keys (electronics/apparel/home); match EN name, not locale label.
+      const inCat =
+        cat === "all" ||
+        p.category.en.toLowerCase() === cat ||
+        p.category.zh === cat;
       const inKw =
         !kw ||
         p.name[locale].toLowerCase().includes(kw) ||
