@@ -84,7 +84,11 @@ try {
     for (const f of walk(join(root, dir))) {
       if (!/\.(tsx?|jsx?)$/.test(f) || allow(f)) continue;
       const lines = readFileSync(f, "utf8").split("\n");
-      lines.forEach((l, i) => { if (/[\u4e00-\u9fff]/.test(l)) hits.push(`${f}:${i + 1}: ${l.trim().slice(0, 60)}`); });
+      lines.forEach((l, i) => {
+        // 去掉注释（// ...、{/* ... */}、/* ... */）后再扫描
+        const code = l.replace(/\/\/.*$/, "").replace(/\{?\/\*.*?\*\/\}?/g, "");
+        if (/[\u4e00-\u9fff]/.test(code)) hits.push(`${f}:${i + 1}: ${l.trim().slice(0, 60)}`);
+      });
     }
   }
   if (hits.length) fail(`发现硬编码中文文案:\n  ${hits.join("\n  ")}`);

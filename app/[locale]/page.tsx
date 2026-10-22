@@ -11,15 +11,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const dict = getDictionary(locale);
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
+    <Container maxWidth="xl" sx={{ py: 4 }}>
       <Stack
         sx={{
-          py: 8, px: { xs: 3, md: 8 }, borderRadius: 4, color: "#fff",
+          py: { xs: 5, md: 8 }, px: { xs: 3, md: 8 }, borderRadius: { xs: 3, md: 4 }, color: "#fff",
           background: "linear-gradient(120deg,#e8532f,#f9a825)",
         }}
       >
-        <Typography variant="h3" fontWeight={900} gutterBottom>{dict.home.heroTitle}</Typography>
-        <Typography variant="h6" fontWeight={400} sx={{ opacity: 0.9, mb: 3 }}>{dict.home.heroSubtitle}</Typography>
+        <Typography
+          variant="h3"
+          fontWeight={900}
+          gutterBottom
+          sx={{ fontSize: { xs: 30, sm: 40, md: 48 }, lineHeight: 1.2 }}
+        >
+          {dict.home.heroTitle}
+        </Typography>
+        <Typography variant="h6" fontWeight={400} sx={{ opacity: 0.9, mb: 3, fontSize: { xs: 15, md: 20 } }}>
+          {dict.home.heroSubtitle}
+        </Typography>
         <Button component={Link} href={`/${locale}/products`} variant="contained" color="inherit" sx={{ alignSelf: "flex-start", px: 4 }}>
           {dict.home.shopNow}
         </Button>

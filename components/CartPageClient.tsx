@@ -42,7 +42,7 @@ export default function CartPage({ locale }: { locale: Locale }) {
             {rows.map((r, i) => (
               <Box key={`${r.productId}-${r.skuId}`}>
                 {i > 0 && <Divider />}
-                <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 2 }}>
+                <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 2, flexWrap: "wrap", rowGap: 1.5 }}>
                   <Box sx={{ width: 72, height: 72, borderRadius: 2, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 36, background: r.product.gradient }}>
                     {r.product.emoji}
                   </Box>
