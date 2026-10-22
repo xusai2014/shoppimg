@@ -2,6 +2,12 @@
 
 Next.js 15 (App Router) + Material UI 6 + framer-motion，中英双语 i18n，Mock 数据无后端，Vercel 一键部署，内置 AI 编程 harness（AGENTS.md）与评估质量门禁。
 
+## 实现合规说明
+
+- **无模板**：全部代码从零手写，未使用任何网站模板、商城模板或已有项目成品。
+- **官方脚手架/框架**：Next.js（App Router）官方框架 + 官方 `@mui/material` 组件库 + framer-motion 动画库，均属允许范围。
+- **Mock 数据**：商品/订单数据自行模拟（`data/products.ts`、`lib/orders.ts`），无后端、无登录、无真实支付，购物车与订单通过浏览器 localStorage 持久化。
+
 ## 产品与体验决策（面向海外消费者）
 
 Brief 要求在有限时间内达到"可向客户演示"，按影响力排定优先级：
