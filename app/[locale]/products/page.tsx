@@ -92,7 +92,7 @@ export default async function ProductsPage({
       {list.length === 0 ? (
         <Typography color="text.secondary" sx={{ py: 8, textAlign: "center" }}>{dict.search.empty}</Typography>
       ) : (
-        <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "repeat(2,1fr)", lg: "repeat(3,1fr)", xl: "repeat(4,1fr)" }, gap: { xs: 2.5, sm: 3 } }}>
+        <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "repeat(2,1fr)", lg: "repeat(3,1fr)", xl: "repeat(4,1fr)" }, gap: { xs: 2.5, sm: 3 }, "& > *": { minWidth: 0 } }}>
           {list.map((p) => (
             <ProductCard key={p.id} product={p} locale={locale} sku={p.skus[0]} />
           ))}
