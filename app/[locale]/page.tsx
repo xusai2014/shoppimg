@@ -1,4 +1,4 @@
-import { Container, Stack, Button, Typography } from "@mui/material";
+import { Container, Stack, Button, Typography, Box } from "@mui/material";
 import Link from "next/link";
 import { getDictionary } from "@/i18n/dictionaries";
 import { products } from "@/data/products";
@@ -35,11 +35,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </Stack>
 
       <Typography variant="h5" fontWeight={700} sx={{ mt: 6, mb: 3 }}>{dict.home.featured}</Typography>
-      <Stack direction="row" flexWrap="wrap" useFlexGap gap={3}>
+      <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "repeat(2,1fr)", lg: "repeat(3,1fr)", xl: "repeat(4,1fr)" }, gap: { xs: 2.5, sm: 3 } }}>
         {products.slice(0, 8).map((p) => (
           <ProductCard key={p.id} product={p} locale={locale} sku={p.skus[0]} />
         ))}
-      </Stack>
+      </Box>
     </Container>
   );
 }
